@@ -5,11 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Models;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace WebApplication.Controllers
 {
-    [Route("api/cadidate")]
+    [Route("api")]
     public class CandidateController : Controller
     {
         private readonly CandidateContext _context;
@@ -19,7 +17,7 @@ namespace WebApplication.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("cadidates")]
         public IEnumerable<Candidate> GetAll() => _context.Candidates.ToList();
 
         [HttpGet("{id}", Name = "GetCandidate")]
