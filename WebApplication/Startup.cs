@@ -27,7 +27,7 @@ namespace WebApplication
         {
             services.AddDbContext<CandidateContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetSection("a").Value);
+                options.UseSqlServer(Configuration.GetSection("Server=(localdb)\\MSSQLLocalDB;Database=Candidate;Trusted_Connection=true;").Value);
             });
             services.AddMvc();
         }
