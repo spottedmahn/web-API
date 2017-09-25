@@ -11,7 +11,7 @@ namespace WebApplication.Models
     public class Candidate
     {
         [Key]
-        [Column("CandidateId", TypeName = "long")]
+        [Column("CandidateId", TypeName = "int")]
         public long Id { get; set; }
 
         [Required]
@@ -35,7 +35,7 @@ namespace WebApplication.Models
         public string Country { get; set; }
 
         [Required]
-        [Column("CandidateCV", TypeName = "varbinary")]
+        [Column("CandidateCV", TypeName = "varbinary(1000)")]
         public byte[] CurriculumVitae { get; set; }
 
         [Column("CandidateSendTime", TypeName = "datetime")]
