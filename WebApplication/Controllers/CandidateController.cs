@@ -9,7 +9,7 @@ using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/cadidate")]
     public class CandidateController : Controller
     {
         private readonly CandidateContext _context;
@@ -21,5 +21,13 @@ namespace WebApplication.Controllers
 
         [HttpGet]
         public IEnumerable<Candidate> GetAll() => _context.Candidates.ToList();
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(long id)
+        {
+            var item = _context.Candidates.FirstOrDefault(candidate => candidate.Id == id);
+            if (item == null) { NotFound(); }
+            return new ObjectResult(item);
+        }
     }
 }
