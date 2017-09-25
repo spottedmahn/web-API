@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using WebApplication.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication
 {
@@ -23,6 +25,10 @@ namespace WebApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<CandidateContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetSection("a").Value);
+            });
             services.AddMvc();
         }
 
