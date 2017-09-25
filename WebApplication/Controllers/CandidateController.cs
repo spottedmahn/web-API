@@ -22,12 +22,29 @@ namespace WebApplication.Controllers
         [HttpGet]
         public IEnumerable<Candidate> GetAll() => _context.Candidates.ToList();
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetCandidate")]
         public IActionResult GetById(long id)
         {
             var item = _context.Candidates.FirstOrDefault(candidate => candidate.Id == id);
             if (item == null) { NotFound(); }
             return new ObjectResult(item);
+        }
+
+        [HttpPost]
+        public void Post([FromBody]string value)
+        {
+        }
+
+        // PUT api/values/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody]string value)
+        {
+        }
+
+        // DELETE api/values/5
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
         }
     }
 }
