@@ -13,7 +13,7 @@ namespace WebApplication.Migrations
                 name: "Candidate");
 
             migrationBuilder.CreateTable(
-                name: "Candidates",
+                name: "candidates",
                 schema: "Candidate",
                 columns: table => new
                 {
@@ -21,22 +21,20 @@ namespace WebApplication.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CandidateCity = table.Column<string>(type: "nvarchar(45)", nullable: false),
                     CandidateCountry = table.Column<string>(type: "nvarchar(45)", nullable: false),
-                    CandidateCV = table.Column<byte[]>(type: "varbinary(1000)", nullable: false),
                     CandidateEmail = table.Column<string>(type: "nvarchar(45)", nullable: false),
                     CandidateState = table.Column<string>(type: "nvarchar(45)", nullable: false),
-                    CandidateName = table.Column<string>(type: "nvarchar(45)", nullable: false),
-                    CandidateSendTime = table.Column<DateTime>(type: "datetime", nullable: false)
+                    CandidateName = table.Column<string>(type: "nvarchar(45)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Candidates", x => x.CandidateId);
+                    table.PrimaryKey("PK_candidates", x => x.CandidateId);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Candidates",
+                name: "candidates",
                 schema: "Candidate");
         }
     }

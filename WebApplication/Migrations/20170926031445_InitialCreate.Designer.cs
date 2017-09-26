@@ -11,7 +11,7 @@ using WebApplication.Models;
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(CandidateContext))]
-    [Migration("20170925233849_InitialCreate")]
+    [Migration("20170926031445_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,11 +38,6 @@ namespace WebApplication.Migrations
                         .HasColumnName("CandidateCountry")
                         .HasColumnType("nvarchar(45)");
 
-                    b.Property<byte[]>("CurriculumVitae")
-                        .IsRequired()
-                        .HasColumnName("CandidateCV")
-                        .HasColumnType("varbinary(1000)");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnName("CandidateEmail")
@@ -58,13 +53,9 @@ namespace WebApplication.Migrations
                         .HasColumnName("CandidateName")
                         .HasColumnType("nvarchar(45)");
 
-                    b.Property<DateTime>("SendTime")
-                        .HasColumnName("CandidateSendTime")
-                        .HasColumnType("datetime");
-
                     b.HasKey("Id");
 
-                    b.ToTable("Candidates","Candidate");
+                    b.ToTable("candidates","Candidate");
                 });
 #pragma warning restore 612, 618
         }

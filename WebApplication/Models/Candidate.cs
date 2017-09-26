@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
-    [Table("Candidates", Schema = "Candidate")]
+    [Table("candidates", Schema = "Candidate")]
     public class Candidate
     {
         [Key]
@@ -33,13 +33,5 @@ namespace WebApplication.Models
         [Required]
         [Column("CandidateCountry", TypeName = "nvarchar(45)")]
         public string Country { get; set; }
-
-        [Required]
-        [Column("CandidateCV", TypeName = "varbinary(1000)")]
-        public byte[] CurriculumVitae { get; set; }
-
-        [Column("CandidateSendTime", TypeName = "datetime")]
-        public DateTime SendTime { get; set; }
-
     }
 }

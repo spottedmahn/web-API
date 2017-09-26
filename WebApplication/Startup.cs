@@ -25,7 +25,8 @@ namespace WebApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CandidateContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            var sqlConnectionString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<CandidateContext>(options => options.UseSqlServer(sqlConnectionString));
             services.AddMvc();
         }
 

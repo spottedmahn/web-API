@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace WebApplication.Controllers
 {
@@ -17,10 +18,10 @@ namespace WebApplication.Controllers
             _context = context;
         }
 
-        [HttpGet("cadidates")]
+        [HttpGet("/cadidates")]
         public IEnumerable<Candidate> GetAll() => _context.Candidates.ToList();
 
-        [HttpGet("{id}", Name = "GetCandidate")]
+        [HttpGet("{id}", Name = "candidate")]
         public IActionResult GetById(long id)
         {
             var item = _context.Candidates.FirstOrDefault(candidate => candidate.Id == id);
@@ -28,9 +29,10 @@ namespace WebApplication.Controllers
             return new ObjectResult(item);
         }
 
-        [HttpPost]
-        public void Post([FromBody]string value)
+        [HttpPost("/register")]
+        public IActionResult Post([FromBody]Candidate item)
         {
+            return Json(item);
         }
 
         // PUT api/values/5
