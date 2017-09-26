@@ -7,51 +7,51 @@ using WebApplication.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System.IO;
-using WebApplication.Helpers;
 
 namespace WebApplication.Controllers
 {
     [Route("api")]
+    [Produces("aplication/json")]
+    [Consumes("application/json", "application/json-patch+json", "multipart/form-data")]
     public class CandidateController : Controller
     {
-        private readonly CandidateContext _context;
+        private readonly CandidateContext dataBase;
 
         public CandidateController(CandidateContext context)
         {
-            _context = context;
+            dataBase = context;
         }
 
-        [HttpGet("/cadidate")]
-        public IEnumerable<Candidate> GetAll() => _context.Candidates.ToList();
+        [HttpGet("cadidate")]
+        public IEnumerable<Candidate> GetAll() => dataBase.Candidates.ToList();
 
         [HttpGet("{id}", Name = "candidate")]
         public IActionResult GetById(long id)
         {
-            var item = _context.Candidates.FirstOrDefault(candidate => candidate.Id == id);
+            var item = dataBase.Candidates.FirstOrDefault(candidate => candidate.Id == id);
             if (item == null) { NotFound(); }
             return new ObjectResult(item);
         }
 
-        [HttpPost("/candidate")]
-        public IActionResult Post()
+        [HttpPost("candidate")]
+        public async Task<IActionResult> Post(IFormFile file)
         {
             var httpRequest = HttpContext.Request;
-
             var json = HttpContext.Request.Headers["Candidates"];
+            var candidates = new JsonSerializer().Deserialize<Candidate>(new JsonTextReader(new StringReader(json)));
 
-            var jsonSerializer = new JsonSerializer();
-            var candidates = jsonSerializer.Deserialize<Candidate>(new JsonTextReader(new StringReader(json)));
-
-            using (var memoryStream = new MemoryStream())
+            if (ModelState.IsValid)
             {
-                //var candidateHelper = new CandidateHelper();
-                //candidateHelper.IFormCurriculum.CopyTo(memoryStream);
-
-                //candidates.CurriculumVitae = memoryStream.ToArray();
-                _context.Add(candidates);
-                _context.SaveChanges();
+                using (var memoryStream = new MemoryStream())
+                {
+                    await file.OpenReadStream().CopyToAsync(memoryStream);
+                    candidates.CurriculumVitae = memoryStream.ToArray();
+                }
+                dataBase.Add(candidates);
+                dataBase.SaveChanges();
                 return Ok(candidates);
             }
+            return BadRequest();
         }
 
         // PUT api/values/5

@@ -8,34 +8,34 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
-    [Table("candidates", Schema = "Candidate")]
+    [Table("candidate", Schema = "Candidate")]
     public class Candidate
     {
         [Key]
         [Column("CandidateId", TypeName = "int")]
-        public long Id { get; set; }
+        public int Id { get; set; }
 
         [Required]
-        [Column("CandidateName", TypeName = "nvarchar(45)")]
+        [Column("CandidateName", TypeName = "nvarchar(max)")]
         public string Name { get; set; }
 
         [Required]
-        [Column("CandidateEmail", TypeName = "nvarchar(45)")]
+        [Column("CandidateEmail", TypeName = "nvarchar(max)")]
         public string Email { get; set; }
 
         [Required]
-        [Column("CandidateCity", TypeName = "nvarchar(45)")]
+        [Column("CandidateCity", TypeName = "nvarchar(max)")]
         public string City { get; set; }
 
         [Required]
-        [Column("CandidateState", TypeName = "nvarchar(45)")]
+        [Column("CandidateState", TypeName = "nvarchar(max)")]
         public string Estate { get; set; }
 
         [Required]
-        [Column("CandidateCountry", TypeName = "nvarchar(45)")]
+        [Column("CandidateCountry", TypeName = "nvarchar(max)")]
         public string Country { get; set; }
 
-        [Column("CandidateCV", TypeName = "varbinary(1000)")]
+        [Column("CandidateCV", TypeName = "varbinary(max)")]
         public byte[] CurriculumVitae { get; set; }
     }
 }

@@ -11,7 +11,7 @@ using WebApplication.Models;
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(CandidateContext))]
-    [Migration("20170926143402_InitialCreate")]
+    [Migration("20170926204115_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,7 +23,7 @@ namespace WebApplication.Migrations
 
             modelBuilder.Entity("WebApplication.Models.Candidate", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("CandidateId")
                         .HasColumnType("int");
@@ -31,35 +31,35 @@ namespace WebApplication.Migrations
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnName("CandidateCity")
-                        .HasColumnType("nvarchar(45)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
                         .IsRequired()
                         .HasColumnName("CandidateCountry")
-                        .HasColumnType("nvarchar(45)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<byte[]>("CurriculumVitae")
                         .HasColumnName("CandidateCV")
-                        .HasColumnType("varbinary(1000)");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnName("CandidateEmail")
-                        .HasColumnType("nvarchar(45)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Estate")
                         .IsRequired()
                         .HasColumnName("CandidateState")
-                        .HasColumnType("nvarchar(45)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnName("CandidateName")
-                        .HasColumnType("nvarchar(45)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("candidates","Candidate");
+                    b.ToTable("candidate","Candidate");
                 });
 #pragma warning restore 612, 618
         }
