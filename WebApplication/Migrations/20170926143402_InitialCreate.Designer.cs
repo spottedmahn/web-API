@@ -11,7 +11,7 @@ using WebApplication.Models;
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(CandidateContext))]
-    [Migration("20170926031445_InitialCreate")]
+    [Migration("20170926143402_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,6 +37,10 @@ namespace WebApplication.Migrations
                         .IsRequired()
                         .HasColumnName("CandidateCountry")
                         .HasColumnType("nvarchar(45)");
+
+                    b.Property<byte[]>("CurriculumVitae")
+                        .HasColumnName("CandidateCV")
+                        .HasColumnType("varbinary(1000)");
 
                     b.Property<string>("Email")
                         .IsRequired()

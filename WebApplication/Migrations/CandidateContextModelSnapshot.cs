@@ -37,6 +37,10 @@ namespace WebApplication.Migrations
                         .HasColumnName("CandidateCountry")
                         .HasColumnType("nvarchar(45)");
 
+                    b.Property<byte[]>("CurriculumVitae")
+                        .HasColumnName("CandidateCV")
+                        .HasColumnType("varbinary(1000)");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnName("CandidateEmail")

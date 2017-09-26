@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -33,5 +34,8 @@ namespace WebApplication.Models
         [Required]
         [Column("CandidateCountry", TypeName = "nvarchar(45)")]
         public string Country { get; set; }
+
+        [Column("CandidateCV", TypeName = "varbinary(1000)")]
+        public byte[] CurriculumVitae { get; set; }
     }
 }

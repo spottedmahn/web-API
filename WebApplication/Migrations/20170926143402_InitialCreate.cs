@@ -21,6 +21,7 @@ namespace WebApplication.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CandidateCity = table.Column<string>(type: "nvarchar(45)", nullable: false),
                     CandidateCountry = table.Column<string>(type: "nvarchar(45)", nullable: false),
+                    CandidateCV = table.Column<byte[]>(type: "varbinary(1000)", nullable: true),
                     CandidateEmail = table.Column<string>(type: "nvarchar(45)", nullable: false),
                     CandidateState = table.Column<string>(type: "nvarchar(45)", nullable: false),
                     CandidateName = table.Column<string>(type: "nvarchar(45)", nullable: false)

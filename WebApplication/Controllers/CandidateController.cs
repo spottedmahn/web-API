@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication.Models;
 using Microsoft.AspNetCore.Http;
+using Newtonsoft.Json;
+using System.IO;
+using WebApplication.Helpers;
 
 namespace WebApplication.Controllers
 {
@@ -18,7 +21,7 @@ namespace WebApplication.Controllers
             _context = context;
         }
 
-        [HttpGet("/cadidates")]
+        [HttpGet("/cadidate")]
         public IEnumerable<Candidate> GetAll() => _context.Candidates.ToList();
 
         [HttpGet("{id}", Name = "candidate")]
@@ -29,10 +32,26 @@ namespace WebApplication.Controllers
             return new ObjectResult(item);
         }
 
-        [HttpPost("/register")]
-        public IActionResult Post([FromBody]Candidate item)
+        [HttpPost("/candidate")]
+        public IActionResult Post()
         {
-            return Json(item);
+            var httpRequest = HttpContext.Request;
+
+            var json = HttpContext.Request.Headers["Candidates"];
+
+            var jsonSerializer = new JsonSerializer();
+            var candidates = jsonSerializer.Deserialize<Candidate>(new JsonTextReader(new StringReader(json)));
+
+            using (var memoryStream = new MemoryStream())
+            {
+                //var candidateHelper = new CandidateHelper();
+                //candidateHelper.IFormCurriculum.CopyTo(memoryStream);
+
+                //candidates.CurriculumVitae = memoryStream.ToArray();
+                _context.Add(candidates);
+                _context.SaveChanges();
+                return Ok(candidates);
+            }
         }
 
         // PUT api/values/5
