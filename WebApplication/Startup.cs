@@ -27,6 +27,17 @@ namespace WebApplication
         {
             var sqlConnectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<CandidateContext>(options => options.UseSqlServer(sqlConnectionString));
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("MyPolicy", 
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+
+            });
+
             services.AddMvc();
         }
 

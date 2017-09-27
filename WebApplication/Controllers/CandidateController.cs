@@ -7,12 +7,14 @@ using WebApplication.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System.IO;
+using Microsoft.AspNetCore.Cors;
 
 namespace WebApplication.Controllers
 {
     [Route("api")]
     [Produces("aplication/json")]
     [Consumes("application/json", "application/json-patch+json", "multipart/form-data")]
+    [EnableCors("MyPoliicy")]
     public class CandidateController : Controller
     {
         private readonly CandidateContext dataBase;
@@ -37,7 +39,7 @@ namespace WebApplication.Controllers
         public async Task<IActionResult> Post(IFormFile file)
         {
             var httpRequest = HttpContext.Request;
-            var json = HttpContext.Request.Headers["Candidates"];
+            var json = HttpContext.Request.Form["Candidates"];
             var candidates = new JsonSerializer().Deserialize<Candidate>(new JsonTextReader(new StringReader(json)));
 
             if (ModelState.IsValid)
