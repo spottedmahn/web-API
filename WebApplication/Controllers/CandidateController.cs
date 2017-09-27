@@ -14,7 +14,6 @@ namespace WebApplication.Controllers
     [Route("api")]
     [Produces("aplication/json")]
     [Consumes("application/json", "application/json-patch+json", "multipart/form-data")]
-    [EnableCors("MyPoliicy")]
     public class CandidateController : Controller
     {
         private readonly CandidateContext dataBase;
