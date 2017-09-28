@@ -48,7 +48,7 @@ namespace WebApplication.Controllers
                     await file.OpenReadStream().CopyToAsync(memoryStream);
                     candidates.CurriculumVitae = memoryStream.ToArray();
                 }
-                dataBase.Add(candidates);
+                await dataBase.AddAsync(candidates);
                 dataBase.SaveChanges();
                 return Ok(candidates);
             }
