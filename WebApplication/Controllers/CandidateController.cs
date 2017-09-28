@@ -23,7 +23,7 @@ namespace WebApplication.Controllers
             dataBase = context;
         }
 
-        [HttpGet("cadidate")]
+        [HttpGet("candidate")]
         public IEnumerable<Candidate> GetAll() => dataBase.Candidates.ToList();
 
         [HttpGet("{id}", Name = "candidate")]
