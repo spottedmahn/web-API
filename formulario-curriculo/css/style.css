@@ -1,0 +1,126 @@
+body {
+  background-color: #5b6b8f;
+  color: #fcffeb;
+}
+
+header {
+  padding: 20px;
+}
+
+h1 {
+  position: relative;
+  display: inline-block;
+}
+
+.svg-container {
+  width: 5%;
+  height: 0;
+  position: relative;
+}
+
+.svg-container svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.site-title {
+  box-sizing: border-box;
+  display: block;
+  margin-left: 120px;
+}
+
+.center-element {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.parent {
+  display: flex;
+}
+
+.mtb-10 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.mb-30 {
+  margin-bottom: 30px;
+}
+
+.description {
+  font-size: 30px;
+  text-align: center;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="datetime"],
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="time"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+    /*box-sizing: border-box;*/
+    /*outline: none;*/
+    /*display: block;*/
+    width: 100%;
+    padding: 7px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background: transparent;
+    margin-bottom: 10px;
+    font: 16px Arial, Helvetica, sans-serif;
+    height: 45px;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+  padding: 15px 32px;
+  margin: 4px 2px;
+  border: 2px solid #474747;
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #D2E2FF;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile + label {
+  color: #474747;
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label,
+.inputfile + label:hover {
+    color: #474747;
+}
+
+button {
+  padding: 15px 32px;
+  margin: 4px 2px;
+  border: 2px solid #474747;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    background: transparent;
+    color: #474747;
+}
