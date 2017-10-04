@@ -19,10 +19,7 @@ namespace WebApplication.Controllers
     {
         private readonly CandidateContext dataBase;
 
-        public CandidateController(CandidateContext context)
-        {
-            dataBase = context;
-        }
+        public CandidateController(CandidateContext context) => dataBase = context;
 
         [HttpGet("candidate")]
         public IEnumerable<Candidate> GetAll() => dataBase.Candidates.ToList();
@@ -30,9 +27,7 @@ namespace WebApplication.Controllers
         [HttpGet("{id}", Name = "candidate")]
         public IActionResult GetById(long? id)
         {
-            var item = dataBase
-                .Candidates
-                .FirstOrDefault(candidate => candidate.Id == id);
+            var item = dataBase.Candidates.FirstOrDefault(candidate => candidate.Id == id);
 
             if (item == null)
                 NotFound();
@@ -59,6 +54,7 @@ namespace WebApplication.Controllers
                 }
                 await dataBase.AddAsync(candidates);
                 dataBase.SaveChanges();
+
                 return Ok(candidates);
             }
             return BadRequest();
@@ -72,11 +68,11 @@ namespace WebApplication.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int? id)
         {
             try
             {
-                Candidate candidate = new Candidate { Id = id };
+                Candidate candidate = new Candidate { Id = (int) id };
 
                 dataBase.Entry(candidate).State = EntityState.Deleted;
                 await dataBase.SaveChangesAsync();
