@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System.IO;
 using Microsoft.AspNetCore.Cors;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication.Controllers
 {
@@ -27,10 +28,15 @@ namespace WebApplication.Controllers
         public IEnumerable<Candidate> GetAll() => dataBase.Candidates.ToList();
 
         [HttpGet("{id}", Name = "candidate")]
-        public IActionResult GetById(long id)
+        public IActionResult GetById(long? id)
         {
-            var item = dataBase.Candidates.FirstOrDefault(candidate => candidate.Id == id);
-            if (item == null) { NotFound(); }
+            var item = dataBase
+                .Candidates
+                .FirstOrDefault(candidate => candidate.Id == id);
+
+            if (item == null)
+                NotFound();
+
             return new ObjectResult(item);
         }
 
@@ -38,8 +44,11 @@ namespace WebApplication.Controllers
         public async Task<IActionResult> Post(IFormFile file)
         {
             var httpRequest = HttpContext.Request;
+
             var json = HttpContext.Request.Form["Candidates"];
-            var candidates = new JsonSerializer().Deserialize<Candidate>(new JsonTextReader(new StringReader(json)));
+
+            var candidates = new JsonSerializer()
+                .Deserialize<Candidate>(new JsonTextReader(new StringReader(json)));
 
             if (ModelState.IsValid)
             {
@@ -63,8 +72,21 @@ namespace WebApplication.Controllers
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
+            try
+            {
+                Candidate candidate = new Candidate { Id = id };
+
+                dataBase.Entry(candidate).State = EntityState.Deleted;
+                await dataBase.SaveChangesAsync();
+
+                return Ok(candidate);
+            }
+            catch(DbUpdateConcurrencyException)
+            {
+                return NotFound();
+            }
         }
     }
 }
