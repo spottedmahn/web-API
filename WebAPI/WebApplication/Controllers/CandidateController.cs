@@ -19,10 +19,12 @@ namespace WebApplication.Controllers
     {
         private readonly CandidateContext dataBase;
 
-        public CandidateController(CandidateContext context) => dataBase = context;
+        public CandidateController(CandidateContext context) => 
+            dataBase = context;
 
         [HttpGet("candidate")]
-        public IEnumerable<Candidate> GetAll() => dataBase.Candidates.ToList();
+        public IEnumerable<Candidate> GetAll() => 
+            dataBase.Candidates.ToList();
 
         [HttpGet("{id}", Name = "candidate")]
         public IActionResult GetById(long? id)
