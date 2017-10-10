@@ -7,7 +7,6 @@ using WebApplication.Models;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 using System.IO;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebApplication.Controllers
