@@ -9,4 +9,3 @@
     [CandidateName]    NVARCHAR (MAX)  NOT NULL,
     CONSTRAINT [PK_candidate] PRIMARY KEY CLUSTERED ([CandidateId] ASC)
 );
-

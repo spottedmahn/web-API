@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 
+using static System.Console;
+
 namespace WebApplication.Controllers
 {
     [Route("api")]
@@ -21,19 +23,22 @@ namespace WebApplication.Controllers
         public CandidateController(CandidateContext context) => 
             dataBase = context;
 
-        [HttpGet("candidate")]
-        public IEnumerable<Candidate> GetAll() => 
-            dataBase.Candidates.ToList();
+        [HttpGet("candidates")]
+        public JsonResult GetAll() => 
+            Json(dataBase.Candidates.ToList());
 
         [HttpGet("{id}", Name = "candidate")]
-        public IActionResult GetById(long? id)
+        public async Task<IActionResult> Get(int? id)
         {
-            var item = dataBase.Candidates.FirstOrDefault(candidate => candidate.Id == id);
+            if (id == null)
+                return NotFound();
+
+            var item = await dataBase.Candidates.Where(candidate => candidate.Id == id).FirstOrDefaultAsync();
 
             if (item == null)
-                NotFound();
+                return NotFound();
 
-            return new ObjectResult(item);
+            return Json(item);
         }
 
         [HttpPost("candidate")]
@@ -43,8 +48,8 @@ namespace WebApplication.Controllers
 
             var json = HttpContext.Request.Form["Candidates"];
 
-            var candidates = new JsonSerializer()
-                .Deserialize<Candidate>(new JsonTextReader(new StringReader(json)));
+            var jsonTextReader = new JsonTextReader(new StringReader(json));
+            var candidates = new JsonSerializer().Deserialize<Candidate>(jsonTextReader);
 
             if (ModelState.IsValid)
             {
