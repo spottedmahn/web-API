@@ -25,6 +25,16 @@ namespace WebApplication
         {
             var sqlConnectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<CandidateContext>(options => options.UseSqlServer(sqlConnectionString));
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+
             services.AddMvc();
         }
 
@@ -36,11 +46,11 @@ namespace WebApplication
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(builder =>
+            /*app.UseCors(builder =>
                 builder.WithOrigins("http://localhost:54392/api")
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .AllowCredentials());
+                .AllowCredentials());*/
 
             app.UseMvc();
         }
