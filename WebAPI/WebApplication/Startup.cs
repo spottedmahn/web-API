@@ -36,11 +36,11 @@ namespace WebApplication
                 app.UseDeveloperExceptionPage();
             }
 
-            //app.UseCors(builder =>
-            //    builder.WithOrigins("http://localhost:54392/api")
-            //    .AllowAnyMethod()
-            //    .AllowAnyHeader()
-            //    .AllowCredentials());
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:54392/api")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
 
             app.UseMvc();
         }

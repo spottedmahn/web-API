@@ -1,4 +1,4 @@
-﻿CREATE TABLE [Candidate].[candidate] (
+﻿CREATE TABLE [Candidates].[candidate] (
     [CandidateId]      INT             IDENTITY (1, 1) NOT NULL,
     [CandidateCity]    NVARCHAR (MAX)  NOT NULL,
     [CandidateCountry] NVARCHAR (MAX)  NOT NULL,

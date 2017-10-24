@@ -15,7 +15,6 @@ using Microsoft.AspNetCore.Cors;
 namespace WebApplication.Controllers
 {
     [Route("api")]
-    [DisableCors]
     //[Produces("aplication/json")]
     //[Consumes("application/json", "application/json-patch+json", "multipart/form-data")]
     public class CandidateController : Controller
