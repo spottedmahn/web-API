@@ -11,7 +11,7 @@ using WebApplication.Models;
 namespace WebApplication.Migrations
 {
     [DbContext(typeof(CandidateContext))]
-    [Migration("20170926204115_InitialCreate")]
+    [Migration("20171024123844_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -59,7 +59,7 @@ namespace WebApplication.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("candidate","Candidate");
+                    b.ToTable("candidate","Candidates");
                 });
 #pragma warning restore 612, 618
         }

@@ -10,12 +10,14 @@ using System.IO;
 using Microsoft.EntityFrameworkCore;
 
 using static System.Console;
+using Microsoft.AspNetCore.Cors;
 
 namespace WebApplication.Controllers
 {
     [Route("api")]
-    [Produces("aplication/json")]
-    [Consumes("application/json", "application/json-patch+json", "multipart/form-data")]
+    [DisableCors]
+    //[Produces("aplication/json")]
+    //[Consumes("application/json", "application/json-patch+json", "multipart/form-data")]
     public class CandidateController : Controller
     {
         private readonly CandidateContext dataBase;

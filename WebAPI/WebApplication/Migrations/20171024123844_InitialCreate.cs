@@ -10,11 +10,11 @@ namespace WebApplication.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "Candidate");
+                name: "Candidates");
 
             migrationBuilder.CreateTable(
                 name: "candidate",
-                schema: "Candidate",
+                schema: "Candidates",
                 columns: table => new
                 {
                     CandidateId = table.Column<int>(type: "int", nullable: false)
@@ -36,7 +36,7 @@ namespace WebApplication.Migrations
         {
             migrationBuilder.DropTable(
                 name: "candidate",
-                schema: "Candidate");
+                schema: "Candidates");
         }
     }
 }

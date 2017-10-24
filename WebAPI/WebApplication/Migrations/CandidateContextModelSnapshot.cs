@@ -58,7 +58,7 @@ namespace WebApplication.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("candidate","Candidate");
+                    b.ToTable("candidate","Candidates");
                 });
 #pragma warning restore 612, 618
         }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
-    [Table("candidate", Schema = "Candidate")]
+    [Table("candidate", Schema = "Candidates")]
     public class Candidate
     {
         [Key]
