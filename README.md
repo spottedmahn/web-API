@@ -6,7 +6,7 @@ Install-Package Microsoft.EntityFrameworkCore.Tools
 Install-Package Microsoft.VisualStudio.Web.CodeGeneration.Design  
 
 #### To create and run migrations enter that commands on PMC
-Add-Migration InitialCreate
+Add-Migration InitialCreate  
 Update-Database
 
 #### To drop database enter this command
