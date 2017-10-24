@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
-    [Table("candidate", Schema = "Candidates")]
+    [Table("candidate")]
     public class Candidate
     {
         [Key]
@@ -35,7 +35,13 @@ namespace WebApplication.Models
         [Column("CandidateCountry", TypeName = "nvarchar(max)")]
         public string Country { get; set; }
 
-        [Column("CandidateCV", TypeName = "varbinary(max)")]
+        [Required]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("IdFile", TypeName = "uniqueidentifier ROWGUIDCOL")]
+        public Guid FileId { get; set; }
+
+        [Required]
+        [Column("CandidateCV", TypeName = "varbinary(max) FILESTREAM")]
         public byte[] CurriculumVitae { get; set; }
     }
 }

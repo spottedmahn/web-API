@@ -15,8 +15,8 @@ using Microsoft.AspNetCore.Cors;
 namespace WebApplication.Controllers
 {
     [Route("api")]
-    //[Produces("aplication/json")]
-    //[Consumes("application/json", "application/json-patch+json", "multipart/form-data")]
+    [Produces("aplication/json")]
+    [Consumes("application/json", "application/json-patch+json", "multipart/form-data")]
     public class CandidateController : Controller
     {
         private readonly CandidateContext dataBase;
@@ -45,26 +45,21 @@ namespace WebApplication.Controllers
         [HttpPost("candidate")]
         public async Task<IActionResult> Post(IFormFile file)
         {
-            var httpRequest = HttpContext.Request;
-
             var json = HttpContext.Request.Form["Candidates"];
-
             var jsonTextReader = new JsonTextReader(new StringReader(json));
             var candidates = new JsonSerializer().Deserialize<Candidate>(jsonTextReader);
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) 
+                return BadRequest();
+            
+            using (var memoryStream = new MemoryStream())
             {
-                using (var memoryStream = new MemoryStream())
-                {
-                    await file.OpenReadStream().CopyToAsync(memoryStream);
-                    candidates.CurriculumVitae = memoryStream.ToArray();
-                }
-                await dataBase.AddAsync(candidates);
-                dataBase.SaveChanges();
-
-                return Ok(candidates);
+                await file.OpenReadStream().CopyToAsync(memoryStream);
+                candidates.CurriculumVitae = memoryStream.ToArray();
             }
-            return BadRequest();
+            await dataBase.AddAsync(candidates);
+            dataBase.SaveChanges();
+            return Ok(candidates);
         }
 
         // PUT api/values/5
@@ -79,7 +74,7 @@ namespace WebApplication.Controllers
         {
             try
             {
-                Candidate candidate = new Candidate { Id = (int) id };
+                var candidate = new Candidate { Id = (int) id };
 
                 dataBase.Entry(candidate).State = EntityState.Deleted;
                 await dataBase.SaveChangesAsync();
