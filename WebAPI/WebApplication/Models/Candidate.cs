@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
-    [Table("candidate", Schema = "candidates")]
+    [Table("candidate")]
     public class Candidate
     {
         [Key]
         [Column("id", TypeName = "int", Order = 0)]
-        public int Id { get; set; }
+        public int CandidateId { get; set; }
 
         [Required]
         [Column("name", TypeName = "nvarchar(max)", Order = 1)]

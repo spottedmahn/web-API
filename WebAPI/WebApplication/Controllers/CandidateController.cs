@@ -34,7 +34,7 @@ namespace WebApplication.Controllers
             if (id == null)
                 return NotFound();
 
-            var item = await dataBase.Candidates.Where(candidate => candidate.Id == id).FirstOrDefaultAsync();
+            var item = await dataBase.Candidates.Where(candidate => candidate.CandidateId == id).FirstOrDefaultAsync();
 
             if (item == null)
                 return NotFound();
@@ -47,7 +47,7 @@ namespace WebApplication.Controllers
         {
             var json = HttpContext.Request.Form["Candidates"];
             var jsonTextReader = new JsonTextReader(new StringReader(json));
-            var candidates = new JsonSerializer().Deserialize<Candidate>(jsonTextReader);
+            var candidate = new JsonSerializer().Deserialize<Candidate>(jsonTextReader);
 
             if (!ModelState.IsValid) 
                 return BadRequest();
@@ -55,11 +55,11 @@ namespace WebApplication.Controllers
             using (var memoryStream = new MemoryStream())
             {
                 await file.OpenReadStream().CopyToAsync(memoryStream);
-                candidates.CurriculumVitae = memoryStream.ToArray();
+                candidate.CurriculumVitae = memoryStream.ToArray();
             }
-            await dataBase.AddAsync(candidates);
+            await dataBase.AddAsync(candidate);
             dataBase.SaveChanges();
-            return Ok(candidates);
+            return Ok(candidate);
         }
 
         // PUT api/values/5
@@ -74,7 +74,7 @@ namespace WebApplication.Controllers
         {
             try
             {
-                var candidate = new Candidate { Id = (int) id };
+                var candidate = new Candidate { CandidateId = (int) id };
 
                 dataBase.Entry(candidate).State = EntityState.Deleted;
                 await dataBase.SaveChangesAsync();
