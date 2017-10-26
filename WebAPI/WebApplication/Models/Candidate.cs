@@ -8,40 +8,41 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Models
 {
-    [Table("candidate")]
+    [Table("candidate", Schema = "candidates")]
     public class Candidate
     {
         [Key]
-        [Column("CandidateId", TypeName = "int")]
+        [Column("id", TypeName = "int", Order = 0)]
         public int Id { get; set; }
 
         [Required]
-        [Column("CandidateName", TypeName = "nvarchar(max)")]
+        [Column("name", TypeName = "nvarchar(max)", Order = 1)]
+        [StringLength(50, MinimumLength = 5)]
         public string Name { get; set; }
 
         [Required]
-        [Column("CandidateEmail", TypeName = "nvarchar(max)")]
+        [Column("email", TypeName = "nvarchar(max)", Order = 2)]
         public string Email { get; set; }
 
         [Required]
-        [Column("CandidateCity", TypeName = "nvarchar(max)")]
+        [Column("city", TypeName = "nvarchar(max)", Order = 3)]
         public string City { get; set; }
 
         [Required]
-        [Column("CandidateState", TypeName = "nvarchar(max)")]
-        public string Estate { get; set; }
+        [Column("state", TypeName = "nvarchar(max)", Order = 4)]
+        public string State { get; set; }
 
         [Required]
-        [Column("CandidateCountry", TypeName = "nvarchar(max)")]
+        [Column("country", TypeName = "nvarchar(max)", Order = 5)]
         public string Country { get; set; }
 
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("IdFile", TypeName = "uniqueidentifier ROWGUIDCOL")]
+        [Column("id_file", TypeName = "uniqueidentifier ROWGUIDCOL", Order = 6)]
         public Guid FileId { get; set; }
 
         [Required]
-        [Column("CandidateCV", TypeName = "varbinary(max) FILESTREAM")]
+        [Column("curriculum_vitae", TypeName = "varbinary(max) FILESTREAM", Order = 7)]
         public byte[] CurriculumVitae { get; set; }
     }
 }

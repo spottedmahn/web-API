@@ -1,11 +1,11 @@
 ﻿CREATE TABLE [candidate] (
-    [CandidateId]      INT             IDENTITY (1, 1) NOT NULL,
-    [CandidateCity]    NVARCHAR (MAX)  NOT NULL,
-    [CandidateCountry] NVARCHAR (MAX)  NOT NULL,
-	[IdFile] [uniqueidentifier] unique ROWGUIDCOL NOT NULL DEFAULT newid(),
-    [CandidateCV]      VARBINARY (MAX) FILESTREAM NULL,
-    [CandidateEmail]   NVARCHAR (MAX)  NOT NULL,
-    [CandidateState]   NVARCHAR (MAX)  NOT NULL,
-    [CandidateName]    NVARCHAR (MAX)  NOT NULL,
-    CONSTRAINT [PK_candidate] PRIMARY KEY CLUSTERED ([CandidateId] ASC)
+    [id]      INT             IDENTITY (1, 1) NOT NULL,
+    [city]    NVARCHAR (MAX)  NOT NULL,
+    [country] NVARCHAR (MAX)  NOT NULL,
+	[id_file] [uniqueidentifier] unique ROWGUIDCOL NOT NULL DEFAULT newid(),
+    [curriculum_vitae]      VARBINARY (MAX) FILESTREAM NULL,
+    [email]   NVARCHAR (MAX)  NOT NULL,
+    [state]   NVARCHAR (MAX)  NOT NULL,
+    [name]    NVARCHAR (MAX)  NOT NULL,
+    CONSTRAINT [PK_candidate] PRIMARY KEY CLUSTERED ([id] ASC)
 );
