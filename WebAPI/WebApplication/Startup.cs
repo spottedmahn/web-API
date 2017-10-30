@@ -36,7 +36,7 @@ namespace WebApplication
                 app.UseDeveloperExceptionPage();
 
             app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:54392/api")
+                builder.AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
