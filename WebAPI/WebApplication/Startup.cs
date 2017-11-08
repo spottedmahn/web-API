@@ -32,14 +32,14 @@ namespace WebApplication
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-                app.UseDeveloperExceptionPage();
-
             app.UseCors(builder =>
-                builder.AllowAnyOrigin()
+                builder.WithOrigins("http://localhost:4200")
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
+
+            if (env.IsDevelopment())
+                app.UseDeveloperExceptionPage();
 
             app.UseMvc();
         }

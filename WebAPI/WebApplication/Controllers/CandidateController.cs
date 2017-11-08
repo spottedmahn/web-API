@@ -15,8 +15,6 @@ using Microsoft.AspNetCore.Cors;
 namespace WebApplication.Controllers
 {
     [Route("api")]
-    [Produces("aplication/json")]
-    [Consumes("application/json", "application/json-patch+json", "multipart/form-data")]
     public class CandidateController : Controller
     {
         private readonly CandidateContext dataBase;
@@ -28,7 +26,7 @@ namespace WebApplication.Controllers
         public JsonResult GetAll() => 
             Json(dataBase.Candidates.ToList());
 
-        [HttpGet("{id}", Name = "candidate")]
+        [HttpGet("/candidates/{id}")]
         public async Task<IActionResult> Get(int? id)
         {
             if (id == null)
@@ -42,10 +40,15 @@ namespace WebApplication.Controllers
             return Json(item);
         }
 
-        [HttpPost("candidate")]
+        //[HttpGet("/candidates/{id}/download")]
+        //public IActionResult Download(int? id)
+        //{
+        //}
+
+        [HttpPost("candidates")]
         public async Task<IActionResult> Post(IFormFile file)
         {
-            var json = HttpContext.Request.Form["Candidates"];
+            var json = HttpContext.Request.Form["Candidates"];      
             var jsonTextReader = new JsonTextReader(new StringReader(json));
             var candidate = new JsonSerializer().Deserialize<Candidate>(jsonTextReader);
 
